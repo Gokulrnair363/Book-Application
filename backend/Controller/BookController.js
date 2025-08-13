@@ -50,8 +50,9 @@ exports.addReview = async (req, res) => {
 
         book.reviews.push({
             user: user._id,  
-            review,
-            rating
+            name: user.name,  
+            review,           
+            rating            
         });
 
         await book.save();
@@ -60,4 +61,3 @@ exports.addReview = async (req, res) => {
         res.status(500).json(err);
     }
 };
-
