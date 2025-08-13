@@ -6,8 +6,7 @@ const verifyToken = (req, res, next) => {
         return res.status(403).json('No token provided');
     }
     
-    // Split on space(s) and take second part (the token)
-    const token = authHeader.split(' ')[1];  // assumes "Bearer token"
+    const token = authHeader.split(' ')[1];
 
     if (!token) {
       return res.status(403).json('No token provided');

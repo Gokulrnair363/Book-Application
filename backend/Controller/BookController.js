@@ -2,11 +2,11 @@ const Book = require('../Model/Book');
 
 exports.addBook = async (req, res) => {
     try {
-        const { title, author } = req.body;
+        const { title, author,description, coverUrl} = req.body;
         if (!title || !author) {
             return res.status(400).json('Title and Author required');
         }
-        const newBook = new Book({ title, author, reviews: [] });
+        const newBook = new Book({ title, author,description, coverUrl, reviews: [] });
         await newBook.save();
         res.status(201).json('Book added successfully');
     } catch (err) {
@@ -35,7 +35,7 @@ exports.getBookById = async (req, res) => {
     }
 };
 
-const User = require('../Model/User');  // Make sure you import your User model
+const User = require('../Model/User'); 
 
 exports.addReview = async (req, res) => {
     try {
@@ -49,8 +49,7 @@ exports.addReview = async (req, res) => {
         if (!user) return res.status(404).json('User not found');
 
         book.reviews.push({
-            user: user._id,    // ObjectId field expected by schema
-            name: user.name,   // User's name required by schema
+            user: user._id,  
             review,
             rating
         });
