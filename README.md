@@ -73,6 +73,8 @@ PORT=5000
 
 Add screenshots to a `screenshots/` folder and reference them here:
 
+### Register page
+![Register](screenshots/register.png)
 ### Login Page
 ![Login](screenshots/login.png)
 
