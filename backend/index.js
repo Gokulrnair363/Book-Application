@@ -7,7 +7,10 @@ const bookserver=express();
 const cors=require('cors');
 
 bookserver.use(express.json());
-bookserver.use(cors());
+bookserver.use(cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true
+}));
 
 bookserver.use('/api/users', UserRoutes);
 bookserver.use('/api',BookRoutes)
