@@ -71,18 +71,17 @@ PORT=5000
 
 ## 🖼️ Screenshots
 
-Add screenshots to a `screenshots/` folder and reference them here:
 
 ### Register page
-![Register](screenshots/register.png)
+![Register](Screenshots/register.png)
 ### Login Page
-![Login](screenshots/login.png)
+![Login](Screenshots/login.png)
 
 ### Book List
-![Book List](screenshots/booklist.png)
+![Book List](Screenshots/booklist.png)
 
 ### Book Details
-![Book Details](screenshots/bookdetails.png)
+![Book Details](Screenshots/bookdetails.png)
 
 ---
 
