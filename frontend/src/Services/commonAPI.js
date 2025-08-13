@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const commonAPI = async (httpMethod, url, reqBody, reqHeader) => {
+export const commonAPI = async (httpMethod, url, reqBody = "", reqHeader = null) => {
   const reqConfig = {
     method: httpMethod,
     url,
@@ -9,9 +9,13 @@ export const commonAPI = async (httpMethod, url, reqBody, reqHeader) => {
   };
 
   try {
-    const response = await axios(reqConfig);
-    return response;
-  } catch (error) {
-    return error;
+    const res = await axios(reqConfig);
+    return { success: true, data: res.data, status: res.status };
+  } catch (err) {
+    return {
+      success: false,
+      data: err.response?.data || { message: err.message || "Unknown error" },
+      status: err.response?.status || 500,
+    };
   }
 };

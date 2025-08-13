@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 import { registerAPI } from "../Services/allAPI";
-import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -8,28 +11,43 @@ const Register = () => {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
     const res = await registerAPI(form);
-    if (res.status === 201) {
-      alert("Registered successfully!");
+    if (res.success) {
+      alert(res.data?.message || "Registration successful!");
       navigate("/login");
     } else {
-      alert(res.data.message || "Registration failed");
+      alert(res.data?.message || "Registration failed");
+      console.error("Register error:", res);
     }
-  };
+  } catch (error) {
+    console.error("Unexpected error:", error);
+    alert("Something went wrong. Check console.");
+  }
+};
+
 
   return (
-    <div className="container mt-5">
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <input name="name" type="text" placeholder="Name" className="form-control mb-2" onChange={handleChange} required />
-        <input name="email" type="email" placeholder="Email" className="form-control mb-2" onChange={handleChange} required />
-        <input name="password" type="password" placeholder="Password" className="form-control mb-2" onChange={handleChange} required />
-        <button className="btn btn-success">Register</button>
-      </form>
-      <p className="mt-2">Already have an account? <Link to="/login">Login</Link></p>
-    </div>
+    <Container className="mt-5" style={{ maxWidth: "400px" }}>
+      <h2 className="mb-4">Register</h2>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3">
+          <Form.Label>Name</Form.Label>
+          <Form.Control type="text" name="name" value={form.name} onChange={handleChange} required />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Email</Form.Label>
+          <Form.Control type="email" name="email" value={form.email} onChange={handleChange} required />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" name="password" value={form.password} onChange={handleChange} required />
+        </Form.Group>
+        <Button type="submit" variant="success">Register</Button>
+      </Form>
+    </Container>
   );
 };
 

@@ -29,7 +29,7 @@ const navigate=useNavigate();
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>
+    <AuthContext.Provider value={{ user, token, login, logout,setUser }}>
       {children}
     </AuthContext.Provider>
   );
