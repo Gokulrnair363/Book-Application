@@ -7,6 +7,8 @@ import Modal from "react-bootstrap/Modal";
 import BookCard from "../Components/BookCard";
 import AddBookForm from "../Components/AddBookForm";
 import { getAllBooksAPI } from "../Services/allAPI";
+import Header from "../Components/Header";
+import Footer from "../Components/Footer";
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
@@ -28,7 +30,9 @@ const BookList = () => {
   }, []);
 
   return (
-    <Container className="mt-4">
+    <>
+    <Header inside/>
+     <Container className="mt-4">
       <div className="d-flex justify-content-between align-items-center">
         <h2>All Books</h2>
 
@@ -37,7 +41,6 @@ const BookList = () => {
         </Button>
       </div>
 
-      {/* Add Book Modal */}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Add a New Book</Modal.Title>
@@ -60,6 +63,9 @@ const BookList = () => {
         ))}
       </Row>
     </Container>
+    <Footer/>
+    </>
+   
   );
 };
 

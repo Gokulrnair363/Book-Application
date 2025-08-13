@@ -1,24 +1,36 @@
-import React from "react";
-import { Navbar, Nav, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Navbar, Container, Nav, Button } from "react-bootstrap";
+import { useNavigate, } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
 
-export default function NavbarComp() {
+const Header = (inside) => {
+  const {  logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+
   return (
-    <Navbar bg="primary" variant="dark" expand="lg">
+    <Navbar bg="primary" variant="dark" expand="lg" className="mb-4">
       <Container>
-        <Navbar.Brand as={Link} to="/">Book Reviews</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse>
-          <Nav className="me-auto">
-            <Nav.Link as={Link} to="/">Home</Nav.Link>
-            <Nav.Link as={Link} to="/add-book">Add Book</Nav.Link>
+        <Navbar.Brand onClick={() => navigate("/books")} style={{ cursor: "pointer" }}>
+           MyBookApp
+        </Navbar.Brand>
+        {inside&& (
+          <Nav className="ms-auto">
+            <Button
+              variant="outline-light"
+              className="me-2"
+              onClick={() => navigate("/books")}
+            >
+              Home
+            </Button>
+            <Button variant="outline-light" onClick={logout}>
+              Logout
+            </Button>
           </Nav>
-          <Nav>
-            <Nav.Link as={Link} to="/login">Login</Nav.Link>
-            <Nav.Link as={Link} to="/register">Register</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
+        )}
       </Container>
     </Navbar>
   );
-}
+};
+
+export default Header;

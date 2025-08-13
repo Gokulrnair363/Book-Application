@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { registerAPI } from "../Services/allAPI";
-
+import Headersss from "../Components/Headersss";
 const Register = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({ name: "", email: "", password: "" });
@@ -30,24 +30,28 @@ const handleSubmit = async (e) => {
 
 
   return (
-    <Container className="mt-5" style={{ maxWidth: "400px" }}>
-      <h2 className="mb-4">Register</h2>
+    <>
+    <Headersss />
+    <Container className="mt-5 bg-primary rounded p-3" style={{ maxWidth: "400px" }}>
+      <h2 className=" text-center text-danger mb-4"><i>Register</i></h2>
       <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3 text-dark ">
           <Form.Label>Name</Form.Label>
           <Form.Control type="text" name="name" value={form.name} onChange={handleChange} required />
         </Form.Group>
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3 text-dark ">
           <Form.Label>Email</Form.Label>
           <Form.Control type="email" name="email" value={form.email} onChange={handleChange} required />
         </Form.Group>
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3 text-dark ">
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" name="password" value={form.password} onChange={handleChange} required />
         </Form.Group>
         <Button type="submit" variant="success">Register</Button>
+        <a href="/login" className="ms-2">already have  account login</a>
       </Form>
     </Container>
+    </>
   );
 };
 
