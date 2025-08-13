@@ -48,7 +48,7 @@ const handleSubmit = async (e) => {
           <Form.Control type="password" name="password" value={form.password} onChange={handleChange} required />
         </Form.Group>
         <Button type="submit" variant="success">Register</Button>
-        <a href="/login" className="ms-2">already have  account login</a>
+        <Link to='/login' className="ms-5 text-dark">Already Have Account register Here</Link>
       </Form>
     </Container>
     </>
