@@ -1,0 +1,26 @@
+const jwt = require('jsonwebtoken');
+
+const verifyToken = (req, res, next) => {
+    const authHeader = req.headers['authorization'];
+    if (!authHeader) {
+        return res.status(403).json('No token provided');
+    }
+    
+    // Split on space(s) and take second part (the token)
+    const token = authHeader.split(' ')[1];  // assumes "Bearer token"
+
+    if (!token) {
+      return res.status(403).json('No token provided');
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            return res.status(401).json('Unauthorized');
+        }
+        req.userId = decoded.id;
+        next();
+    });
+};
+
+
+module.exports = verifyToken;
